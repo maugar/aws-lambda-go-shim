@@ -37,4 +37,7 @@ class Handler(object):
                           json.dumps(dict(**os.environ)),
                           ctx.get_remaining_time_in_millis)
         if res is not None:
+            j=json.loads(res)
+            if j.get('errorMessage'):
+                raise RuntimeError(j.get('errorMessage'))
             return json.loads(res)
